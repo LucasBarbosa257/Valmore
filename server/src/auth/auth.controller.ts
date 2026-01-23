@@ -3,7 +3,9 @@ import { SignUpDto } from './dto/signup.dto';
 import { AuthResponseDto } from './dto/auth-response.dto';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/signin.dto';
+import { Public } from 'src/shared/decorators/public.decorator';
 
+@Public()
 @Controller('auth')
 export class AuthController {
     constructor(
@@ -22,10 +24,5 @@ export class AuthController {
         @Body() body: SignInDto
     ): Promise<AuthResponseDto> {
         return await this.authService.signIn(body);
-    }
-
-    @Post('logout')
-    public async logout(): Promise<void> {
-        
     }
 }
