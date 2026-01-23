@@ -1,6 +1,6 @@
-import { IsEmail, IsNumber, IsString, Length, MaxLength } from "class-validator";
+import { IsEmail, IsString, Length, MaxLength } from "class-validator";
 
-export class SignupDto {
+export class SignUpDto {
     @IsString()
     @MaxLength(60)
     name: string;
