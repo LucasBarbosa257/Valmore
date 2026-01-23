@@ -7,6 +7,6 @@ import { UsersDao } from './dao';
     UsersService, 
     UsersDao
   ],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}

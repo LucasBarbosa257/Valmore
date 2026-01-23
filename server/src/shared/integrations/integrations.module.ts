@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { JiraModule } from './jira/jira.module';
-import { OpenAiModule } from './open-ai/open-ai.module';
+import { AiModule } from './ai/ai.module';
 
 @Module({
-  imports: [JiraModule, OpenAiModule]
+  imports: [JiraModule, AiModule]
 })
 export class IntegrationsModule {}

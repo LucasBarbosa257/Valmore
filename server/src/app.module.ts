@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from './shared/guards/api-key.guard';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { UserIntegrationsModule } from './user-integrations/user-integrations.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { AuthGuard } from './auth/guards/auth.guard';
     }),
     SharedModule,
     AuthModule,
-    UsersModule
+    UsersModule,
+    UserIntegrationsModule
   ],
   providers: [
     {
