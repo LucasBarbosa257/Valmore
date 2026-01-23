@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CreateUserInput, FindUserByEmailInput, User } from "../interfaces";
+import { DatabaseConnection } from "src/shared/database/database.connection";
 
 @Injectable()
 export class UsersDao {

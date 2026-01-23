@@ -21,7 +21,7 @@ export class AuthService {
         });
 
         if (user) {
-            throw new ConflictException();
+            throw new ConflictException("This email address is already in use.");
         }
 
         const userId = await this.usersService.create({
@@ -44,17 +44,13 @@ export class AuthService {
             email: data.email
         });
 
-        if (!user) {
-            throw new UnauthorizedException();
-        }
-
-        const isMatch = await bcrypt.compare(
+        const isValid = user && await bcrypt.compare(
             data.password,
             user.password
         );
 
-        if (!isMatch) {
-            throw new UnauthorizedException();
+        if (!isValid) {
+            throw new UnauthorizedException('The email address or password is incorrect.');
         }
 
         return {
