@@ -16,7 +16,7 @@ export class AuthService {
     public async signUp(
         data: SignUpDto
     ): Promise<AuthResponseDto> {
-        const user = await this.usersService.findOneByEmail({
+        const user = await this.usersService.findByEmail({
             email: data.email
         });
 
@@ -40,7 +40,7 @@ export class AuthService {
     public async signIn(
         data: SignInDto
     ): Promise<AuthResponseDto> {
-        const user = await this.usersService.findOneByEmail({
+        const user = await this.usersService.findByEmail({
             email: data.email
         });
 

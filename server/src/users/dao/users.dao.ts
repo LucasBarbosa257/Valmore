@@ -10,7 +10,7 @@ export class UsersDao {
         private readonly dbConnection: DatabaseConnection
     ) { }
 
-    public async findOneByEmail(
+    public async findByEmail(
         data: FindUserByEmailInput
     ): Promise<User | null> {
         const query = `

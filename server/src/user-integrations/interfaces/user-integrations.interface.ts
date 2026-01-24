@@ -7,11 +7,15 @@ export interface UserIntegration {
     updated_at: string;
 }
 
+export interface CreateUserIntegrationPayload {
+    user_id: string;
+    provider: string;
+}
+
 export interface CreateUserIntegrationInput {
     id: string;
+    user_id: string;
     provider: string;
-    host: string;
-    api_token: string;
 }
 
 export interface UpdateUserIntegrationInput {

@@ -15,8 +15,7 @@ export class DatabaseConnection implements OnModuleDestroy {
             database: this.configService.getOrThrow('DATABASE_NAME'),
             user: this.configService.getOrThrow('DATABASE_USER'),
             password: this.configService.getOrThrow('DATABASE_PASSWORD'),
-            max: 10,
-            options: '-c search_path=api',
+            max: 10
         });
     }
 

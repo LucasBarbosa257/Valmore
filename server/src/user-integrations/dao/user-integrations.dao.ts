@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseConnection } from "src/shared/database/database.connection";
-import { CreateUserIntegrationInput, UpdateUserIntegrationInput } from "../interfaces";
+import { CreateUserIntegrationInput, UpdateUserIntegrationInput, UserIntegration } from "../interfaces";
 
 @Injectable()
 export class UserIntegrationsDao {
@@ -10,17 +10,29 @@ export class UserIntegrationsDao {
        private readonly dbConnection: DatabaseConnection 
     ) {}
 
+    public async findAll(): Promise<UserIntegration[]> {
+        const query = `
+            SELECT
+                id,
+                provider,
+                host,
+                api_token
+            FROM ${this.table}
+        `;
+
+        return await this.dbConnection.execute(query);
+    }
+
     public async create(
         data: CreateUserIntegrationInput
     ): Promise<void> {
         const query = `
             INSERT INTO ${this.table} (
                 id,
-                provider,
-                host,
-                api_token
+                user_id,
+                provider
             ) VALUES (
-                $1, $2, $3, $4 
+                $1, $2, $3
             )
         `;
 
@@ -28,9 +40,8 @@ export class UserIntegrationsDao {
             query,
             [
                 data.id,
-                data.provider,
-                data.host,
-                data.api_token
+                data.user_id,
+                data.provider
             ]
         );
     }
