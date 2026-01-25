@@ -1,6 +1,7 @@
 interface JiraConfig {
+    method: 'GET' | 'POST';
     endpoint: string;
-    params?: string;
+    body?: Record<string, any>;
 }
 
 export class JiraClient {
@@ -13,18 +14,18 @@ export class JiraClient {
     public async fetch(
         data: JiraConfig
     ): Promise<any> {
-        const url = `https://${this.host}.atlassian.net/rest/api/3/${data.endpoint}?${data.params}`;
+        const url = `https://${this.host}.atlassian.net/rest/api/3/${data.endpoint}`;
 
         const response = await fetch(url, {
-            method: 'GET',
+            method: data.method,
             headers: {
                 'Authorization': `Basic ${Buffer.from(
                     `${this.userEmail}:${this.apiToken}`
                 ).toString('base64')}`,
-                'Accept': 'application/json'
-            }
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data.body)
         });
-
 
         const text = await response.text();
 
