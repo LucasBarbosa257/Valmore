@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { DatabaseConnection } from "src/shared/database/database.connection";
-import { CreateUserIntegrationInput, UpdateUserIntegrationInput, UserIntegration } from "../interfaces";
+import { CreateUserIntegrationInput, FindUserIntegrationByUserIdAndProviderInput, FindUserIntegrationsByUserIdInput, UpdateUserIntegrationInput, UserIntegration } from "../interfaces";
 
 @Injectable()
 export class UserIntegrationsDao {
@@ -10,17 +10,39 @@ export class UserIntegrationsDao {
        private readonly dbConnection: DatabaseConnection 
     ) {}
 
-    public async findAll(): Promise<UserIntegration[]> {
+    public async findAllByUserId(
+        data: FindUserIntegrationsByUserIdInput
+    ): Promise<UserIntegration[]> {
         const query = `
-            SELECT
-                id,
-                provider,
-                host,
-                api_token
+            SELECT *
             FROM ${this.table}
+            WHERE user_id = $1
         `;
 
-        return await this.dbConnection.execute(query);
+        return await this.dbConnection.execute(
+            query,
+            [data.user_id]
+        );
+    }
+
+    public async findByUserIdAndProvider(
+        data: FindUserIntegrationByUserIdAndProviderInput
+    ): Promise<UserIntegration | null> {
+        const query = `
+            SELECT *
+            FROM ${this.table}
+            WHERE user_id = $1 AND provider = $2
+        `;
+
+        const result = await this.dbConnection.execute(
+            query,
+            [
+                data.user_id,
+                data.provider
+            ]
+        );
+
+        return result[0] ?? null;
     }
 
     public async create(
@@ -53,15 +75,17 @@ export class UserIntegrationsDao {
             UPDATE ${this.table}
             SET
                 host = $1,
-                api_token = $2,
+                email = $2,
+                api_token = $3,
                 updated_at = CURRENT_TIMESTAMP
-            WHERE id = $3
+            WHERE id = $4
         `;    
 
         await this.dbConnection.execute(
             query,
             [
                 data.host,
+                data.email,
                 data.api_token,
                 data.id
             ]

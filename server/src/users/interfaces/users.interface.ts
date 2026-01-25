@@ -7,10 +7,6 @@ export interface User {
     updated_at: string;
 }
 
-export interface FindUserByEmailPayload {
-    email: string;
-}
-
 export interface FindUserByEmailInput {
     email: string;
 }

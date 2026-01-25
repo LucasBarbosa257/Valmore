@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UsersDao } from './dao';
-import { CreateUserPayload, FindUserByEmailPayload, User } from './interfaces';
+import { CreateUserPayload, FindUserByEmailInput, User } from './interfaces';
 import { randomUUID } from 'crypto';
 import { UserIntegrationsService } from 'src/user-integrations/user-integrations.service';
 
@@ -12,9 +12,11 @@ export class UsersService {
     ) { }
 
     public async findByEmail(
-        data: FindUserByEmailPayload
+        data: FindUserByEmailInput
     ): Promise<User | null> {
-        return await this.usersDao.findByEmail(data);
+        return await this.usersDao.findByEmail({
+            email: data.email
+        });
     }
 
     public async create(

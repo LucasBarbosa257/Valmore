@@ -14,11 +14,7 @@ export class UsersDao {
         data: FindUserByEmailInput
     ): Promise<User | null> {
         const query = `
-            SELECT
-                id,
-                name,
-                email,
-                password
+            SELECT *
             FROM ${this.table}
             WHERE EMAIL = $1
             LIMIT 1;
