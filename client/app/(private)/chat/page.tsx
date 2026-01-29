@@ -29,37 +29,41 @@ interface Message {
 }
 
 const QUICK_PROMPTS = [
-    "Quais entregas estão avançando bem neste momento?",
-    "Quais entregas apresentam atraso ou risco de atraso?",
-    "Há tarefas importantes paradas no fluxo atual?",
+    "Como foi a última semana de trabalho?",
+    "O que o time conseguiu entregar recentemente?",
+    "Quais entregas geraram mais valor até agora?",
 
-    "Onde o trabalho está fluindo sem bloqueios agora?",
-    "Onde o fluxo está travado neste momento?",
-    "Quais bloqueios estão impedindo o avanço das tarefas?",
+    "Como está o volume de trabalho aberto hoje?",
+    "Onde está concentrado o esforço do time?",
+    "Há muito trabalho em andamento ao mesmo tempo?",
 
-    "Quais tarefas estão claras e bem definidas hoje?",
-    "Onde há dúvidas ou falta de definição nas tarefas?",
-    "Essa falta de clareza já está afetando as entregas?",
+    "Como está a distribuição de trabalho entre as pessoas?",
+    "Quem está com mais demandas abertas atualmente?",
+    "Há pessoas com carga acima do normal?",
 
-    "O esforço do time está concentrado no que gera mais impacto?",
-    "Há trabalho em andamento com baixo impacto para o negócio?",
-    "As prioridades atuais estão alinhadas com os objetivos da empresa?",
+    "Como está o tempo investido nos projetos em andamento?",
+    "Onde o tempo está sendo mais consumido?",
+    "Há iniciativas consumindo tempo demais para o valor entregue?",
 
-    "A carga de trabalho do time está equilibrada agora?",
-    "Há pessoas ou áreas sobrecarregadas neste momento?",
-    "Essa sobrecarga está afetando prazos ou qualidade?",
+    "Quais entregas estão dentro do prazo?",
+    "O que já está atrasado?",
+    "O que está próximo do prazo final?",
 
-    "Quais tarefas estão passando por validação sem ajustes?",
-    "Onde estão ocorrendo correções ou retrabalho?",
-    "O retrabalho atual está dentro do esperado?",
+    "Como está o ritmo de entrega do time?",
+    "O volume de entregas está compatível com o tamanho do time?",
+    "O time está conseguindo concluir o que começa?",
 
-    "Quais riscos são visíveis no estado atual das entregas?",
-    "Existe risco imediato de não cumprimento de compromissos?",
-    "Algum risco exige decisão da liderança agora?",
+    "Quais projetos concentram mais riscos hoje?",
+    "Onde há acúmulo de trabalho aberto?",
+    "Há entregas importantes em risco agora?",
 
-    "Quais decisões precisam ser tomadas para destravar o trabalho?",
-    "Onde a falta de decisão está limitando o avanço?",
-    "Qual decisão teria maior impacto positivo neste momento?"
+    "No que o time está focado neste momento?",
+    "Esse foco está alinhado com as prioridades atuais?",
+    "Há esforço sendo gasto fora do que é mais importante?",
+
+    "Onde decisões podem acelerar as entregas?",
+    "Quais pontos hoje dependem de decisão?",
+    "Qual decisão teria mais impacto agora?"
 ]
 
 const PENDING_MESSAGES = [
@@ -402,7 +406,7 @@ export default function ChatPage() {
 
                                     {messages.length === 0 && (
                                         <div className="flex flex-col items-center gap-4">
-                                            <p className="text-sm text-muted-foreground">
+                                            <p className="text-muted-foreground text-center">
                                                 Escolha uma das sugestões abaixo
                                                 ou escreva sua própria pergunta
                                             </p>
@@ -424,7 +428,7 @@ export default function ChatPage() {
                                                                     prompt
                                                                 )
                                                             }
-                                                            className="cursor-pointer border-2 hover:border-accent px-5 rounded-lg"
+                                                            className="cursor-pointer border-2 hover:border-accent px-5 rounded-lg max-w-full whitespace-normal break-words py-6"
                                                         >
                                                             {prompt}
                                                         </Button>
