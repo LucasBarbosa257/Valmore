@@ -51,7 +51,7 @@ export async function customFetch<T>(
             throw new Error(errorMessage)
         }
 
-        if (response.status === 204) {
+        if (response.status === 204 || response.headers.get("content-length") === "0") {
             return {} as T
         }
 

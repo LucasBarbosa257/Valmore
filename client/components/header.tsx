@@ -1,23 +1,21 @@
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
 
 export function Header() {
     return (
-        <header className="border-b border-border bg-background/80 backdrop-blur-xl py-2">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4">
-                <div className="flex items-center gap-2">
-                    <Link href={"/"}>
-                        <Image
-                            src="/images/valmore-logo.png"
-                            alt="Valmore Logo"
-                            width={56}
-                            height={56}
-                            className="rounded-lg"
-                        />
-                    </Link>
-                </div>
+        <header className="border-b border-border bg-background/80 backdrop-blur-xl">
+            <div className="container mx-auto flex h-14 items-center justify-between px-4">
+                <Link
+                    href="/"
+                    className="group flex items-center gap-2 cursor-pointer"
+                >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground font-bold text-sm shadow-sm transition-transform group-hover:scale-105">
+                        V
+                    </div>
+
+                    <span className="text-lg font-semibold tracking-tight">
+                        Valmore
+                    </span>
+                </Link>
             </div>
         </header>
     )
