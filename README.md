@@ -86,7 +86,7 @@ cd valmore
 2. Suba todo o projeto de uma vez com o Docker:
 
 ```bash
-docker compose build -d
+docker compose up -d
 ```
 
 Após isso, **toda a aplicação estará rodando e funcional**, incluindo frontend, backend, agentes de IA e banco de dados.
